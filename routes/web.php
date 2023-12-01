@@ -3,6 +3,9 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\FilmController;
+use App\Http\Controllers\TypeController;
+use App\Http\Controllers\FilmTypePivotController;
 
 use Illuminate\Support\Facades\Auth;
 
@@ -27,12 +30,22 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 //dashborad Admin
 Route::group(['middleware' => ['auth','checkAdmin']], function() {
     // view dashborad admin
-    Route::get('/admin', [App\Http\Controllers\AdminController::class, 'index'])->name('admin');
+    Route::get('/admin', [App\Http\Controllers\AdminController::class, 'admin'])->name('admin');
     // view show users
     Route::get('/showUser', [App\Http\Controllers\UserController::class, 'index'])->name('show.user');
+    //film 
+       Route::resource('film',FilmController::class);
+       //type
+       Route::resource('type',TypeController::class);
+       //Film_Type
+       Route::resource('film_Type',FilmTypePivotController::class);
+
 
 });
 
-
+//test relation
+      
+Route::get('film/{id}', [FilmController::class, 'film'])->name('film');
+Route::get('getfilm/{id}', [FilmController::class, 'getFilm'])->name('getfilm');
 
 

@@ -11,4 +11,7 @@ class AdminController extends Controller
     public function index(){
         return view('dashborad.admin');
     }
+    public function admin(){
+        return view('backend.layout.master');
+    }
 }

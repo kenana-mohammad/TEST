@@ -19,8 +19,8 @@
         <!-- href to show user -->
         <a class="btn btn-primary" href="{{route('show.user')}}">Show Users</a>
     </div>
-                </div>
-            </div>
+
+</div>
         </div>
     </div>
 </div>
