@@ -13,7 +13,7 @@ class Type extends Model
 
     //relation many to many (film && type)
       
-    public function Film(){
+    public function Films(){
 
         return $this->beLongsToMany(film::class , table:'film_type_pivots');
     }

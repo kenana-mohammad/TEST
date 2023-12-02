@@ -19,7 +19,7 @@ class film extends Model
       
       //one To many (film,actor)
 
-       public function actor(){
+       public function actors(){
 
         return $this->hasMany(Actor::class);
 
@@ -28,7 +28,7 @@ class film extends Model
 
        // many to many (film && type)
 
-          public function type(){
+          public function types(){
 
             return $this->beLongsToMany(Type::class , table:'film_type_pivots');
           }

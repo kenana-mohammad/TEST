@@ -6,6 +6,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\FilmController;
 use App\Http\Controllers\TypeController;
 use App\Http\Controllers\FilmTypePivotController;
+use App\Http\controllers\RoleController;
 
 use Illuminate\Support\Facades\Auth;
 
@@ -39,7 +40,8 @@ Route::group(['middleware' => ['auth','checkAdmin']], function() {
        Route::resource('type',TypeController::class);
        //Film_Type
        Route::resource('film_Type',FilmTypePivotController::class);
-
+       Route::resource('roles',RoleController::class);
+       Route::resource('users',UserController::class);
 
 });
 

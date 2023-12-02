@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('types', function (Blueprint $table) {
             $table->id();
-            $table->enum('type',['romantic','action','comedy','Drama','police'])->nullable();
+            $table->string('type')->nullable();
             $table->timestamps();
         });
     }

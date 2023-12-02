@@ -47,14 +47,38 @@
             </a>
             <ul id="ddmenu_2" class="collapse dropdown-nav">
               <li>
-                <a > users </a>
+                <a href="{{route('users.index')}}"> users </a>
               </li>
              
             </ul>
           </li>
          <!-- end_user -->
         
+<!-- role -->
 
+<li class="nav-item nav-item-has-children">
+            <a
+              href="#0"
+              class="collapsed"
+              data-bs-toggle="collapse"
+              data-bs-target="#ddmenu_6"
+              aria-controls="ddmenu_6"
+              aria-expanded="false"
+              aria-label="Toggle navigation"
+            >
+              <span class="icon">
+              <i class="lni lni-protection"></i>
+              </span>
+              <h5 class="text">role</h5>
+            </a>
+            <ul id="ddmenu_6" class="collapse dropdown-nav">
+              <li>
+                <a  href="{{route('roles.index')}}"> role </a>
+              </li>
+             
+            </ul>
+</li>
+      
          <li class="nav-item nav-item-has-children">
             <a
               href="#0"

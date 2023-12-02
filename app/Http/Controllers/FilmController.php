@@ -14,8 +14,8 @@ class FilmController extends Controller
     public function index()
     {
         //
-          $film=film::get();
-          return view('backend.dashborad.films.index',compact('film'));
+          $films=film::get();
+          return view('backend.dashborad.films.index',compact('films'));
     }
 
     /**
