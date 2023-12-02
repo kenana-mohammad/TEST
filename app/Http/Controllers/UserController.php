@@ -108,14 +108,31 @@ class UserController extends Controller
      * 
      * @return \Illuminate\Http\Response
      */
-    public function update(User $user, UpdateUserRequest $request) 
+    public function update(int $id, Request $request) 
     {
-        $user->update($request->validated());
+        $input = $request->all();
+        if (!empty($input['password'])) {
+            $input['password'] = Hash::make($input['password']);
+        } else {
+            $input = Arr::except($input, array('password'));
 
-        $user->syncRoles($request->get('role'));
+        }
+       
+    
+        $user = User::find($id);
 
+   
+       
+   
+        $user->update($input);
+        DB::table('model_has_roles')->where('model_id',$id)->delete();
+
+       // DB::table('roles')->where('id',$id)->delete();
+    
+        $user->assignRole($request->input('role'));
+    
         return redirect()->route('users.index')
-            ->withSuccess(__('User updated successfully.'));
+                        ->with('success','User updated successfully');
     }
 
     /**
