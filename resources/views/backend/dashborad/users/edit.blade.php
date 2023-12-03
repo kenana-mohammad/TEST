@@ -49,12 +49,7 @@
 
 
                     
-                    <div class="col-xxl-4">
-                      <div class="input-style-1">
-                        <label>role</label>
-                        {!! Form::select('role[]', $roles,$userRole, array('class' => 'form-control','multiple')) !!}
-
-                      </div>
+                 
                     </div>
                     
                     </div>

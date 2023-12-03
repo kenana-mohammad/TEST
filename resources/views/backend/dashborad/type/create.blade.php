@@ -27,17 +27,12 @@
                  
                   <div class="select-style-1">
                     <label>Type</label>
-                    <div class="select-position">
-                      <select name="type">
-                     
-                      <option value="" selected>select</option>
-
-                        <option value="romantic">romantic</option>
-                        <option value="action">action</option>
-                        <option value="comedy">comedy</option>
-                        <option value="Drama">Drama</option>
-                        <option value="police">police</option>
-                      </select>
+                    <div class="col-12">
+                      <div class="input-style-1">
+                        <label> type</label>
+                        <input type="text" placeholder="type" name="type" />
+                       
+                      </div>
                     </div>
                   </div>
  

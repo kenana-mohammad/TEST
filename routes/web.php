@@ -36,6 +36,7 @@ Route::group(['middleware' => ['auth','checkAdmin']], function() {
     Route::get('/showUser', [App\Http\Controllers\UserController::class, 'index'])->name('show.user');
     //film 
        Route::resource('film',FilmController::class);
+       Route::get('/gettypes/{id}', [FilmController::class, 'getTypes'])->name('getTypes');
        //type
        Route::resource('type',TypeController::class);
        //Film_Type

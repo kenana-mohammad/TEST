@@ -84,10 +84,10 @@ class RoleController extends Controller
      */
     public function edit(Role $role)
     {
-        $role = $role;
-        // $rolePermissions = $role->permissions;
+        // $role = $role;
+        // // $rolePermissions = $role->permissions;
     
-        return view('backend.dashborad.role.edit', compact('role'));
+        // return view('backend.dashborad.role.edit', compact('role'));
     }
     
     /**
@@ -99,17 +99,17 @@ class RoleController extends Controller
      */
     public function update(Role $role, Request $request)
     {
-        $this->validate($request, [
-            'name' => 'required',
-            // 'permission' => 'required',
-        ]);
+        // $this->validate($request, [
+        //     'name' => 'required',
+        //     // 'permission' => 'required',
+        // ]);
         
-        $role->update($request->only('name'));
+        // $role->update($request->only('name'));
     
-        // $role->syncPermissions($request->get('permission'));
+        // // $role->syncPermissions($request->get('permission'));
     
-        return redirect()->route('roles.index')
-                        ->with('success','Role updated successfully');
+        // return redirect()->route('roles.index')
+        //                 ->with('success','Role updated successfully');
     }
 
     /**

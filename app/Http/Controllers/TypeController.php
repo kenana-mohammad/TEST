@@ -13,7 +13,7 @@ class TypeController extends Controller
     public function index()
     {
         //
-        $type = Type::get();
+        $type = Type::all();
         return view('backend.dashborad.Type.index' , compact('type'));
     }
 
@@ -32,18 +32,16 @@ class TypeController extends Controller
     public function store(Request $request)
     {
         //
-        $type = new Type();
+        $type = Type::create([
+            'type' =>$request->type,
+        ]);
 
-        $type->type = $request->input('type');
-        if(!$type){
-        $type->save();
-        return redirect()->route('type.index');
+       
+        return redirect()->route('type.index')->with('add','done');
 
     }
-        else{
-            return redirect()->route('type.index')->with('check','القيمة مضافة مسبقا');
-        }
-    }
+        
+    
 
     /**
      * Display the specified resource.
@@ -56,24 +54,46 @@ class TypeController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Type $type)
+    public function edit(int $id)
     {
         //
+        $type = type::find($id);
+        return view('backend.dashborad.type.edit' ,compact('type'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Type $type)
+    public function update(Request $request, int $id)
     {
         //
+        $type= type::find($id);
+        $type->type=$request->input('type');
+        $type->save();
+        
+        $type->Films()->sync($type->id);
+        return redirect()->route('type.index');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Type $type)
+    public function destroy(int $id)
     {
         //
+        $type = type::find($id);
+
+        if ($type) {
+            $film = $type->Films;
+        
+            if ($film) {
+                $type->Films()->detach();
+            }
+        
+            $type->delete();
+            return redirect()->back();
+
+
     }
+}
 }

@@ -30,7 +30,12 @@
                       <div class="input-style-1">
                         <label> name</label>
                         <input type="text" placeholder="name" name="name" />
+                         @error('name')
+                        <span class="text-danger text-left">{{ $message }}</span>
+                    @enderror
                       </div></div>
+
+
                       <div class="col-12">
                        <div class="input-style-1">
                         <label>show Time</label>
@@ -51,7 +56,22 @@
 
 </div></div>
 
+<!-- type -->
+
+                    <!-- check film -->
+              
+ 
+                  <div class="select-style-1">
+                    <label>multi Type </label>
+                    <div class="select-position">
+                    <select name="Type_id[]" class="form-control" multiple>
+                                                <option selected >please choose types</option>
+                                                @foreach($alltypes as $alltype)
+                                                <option value="{{$alltype->id}}">{{$alltype->type}}</option>
+                                                @endforeach
+                                            </select>
                     </div>
+                  </div>
                     <div class="col-12">
                       <button class="main-btn primary-btn btn-hover">
                         Add Film

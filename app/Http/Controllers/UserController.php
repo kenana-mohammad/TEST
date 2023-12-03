@@ -92,10 +92,10 @@ class UserController extends Controller
     public function edit(string $id)
     {
         $user = User::find($id);
-        $roles = Role::pluck('name','name')->all();
-        $userRole = $user->roles->pluck('name','name')->all();
+        // $roles = Role::pluck('name','name')->all();
+        // $userRole = $user->roles->pluck('name','name')->all();
     
-        return view('backend.dashborad.users.edit',compact('user','roles','userRole'));
+        return view('backend.dashborad.users.edit',compact('user'));
    
 
     }
@@ -125,11 +125,11 @@ class UserController extends Controller
        
    
         $user->update($input);
-        DB::table('model_has_roles')->where('model_id',$id)->delete();
+        // DB::table('model_has_roles')->where('model_id',$id)->delete();
 
        // DB::table('roles')->where('id',$id)->delete();
     
-        $user->assignRole($request->input('role'));
+        // $user->assignRole($request->input('role'));
     
         return redirect()->route('users.index')
                         ->with('success','User updated successfully');
