@@ -7,6 +7,7 @@ use App\Http\Controllers\FilmController;
 use App\Http\Controllers\TypeController;
 use App\Http\Controllers\FilmTypePivotController;
 use App\Http\controllers\RoleController;
+use App\Http\controllers\FrontendController;
 
 use Illuminate\Support\Facades\Auth;
 
@@ -20,10 +21,7 @@ use Illuminate\Support\Facades\Auth;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [App\Http\Controllers\FrontendController::class, 'index'])->name('index');
 
 Auth::routes();
 
@@ -45,7 +43,11 @@ Route::group(['middleware' => ['auth','checkAdmin']], function() {
        Route::resource('users',UserController::class);
 
 });
+//show details film
+Route::group(['middleware' => 'auth'], function() {
 
+ Route::get('/details/{id}',[FrontendController::class,'show'])->name('showdetails');
+});
 //test relation
       
 Route::get('film/{id}', [FilmController::class, 'film'])->name('film');

@@ -10,6 +10,14 @@
         <a href="{{route('film.create')}}" class="btn btn-primary mt-2 mb-4  "> Add Film</a>
 
 </div>
+@if(Session::has('add'))
+                            <div class="alert alert-success" role="alert">
+                            {{ session('add') }}
+                          </div>@endif
+@if(Session::has('edit'))
+                            <div class="alert alert-success" role="alert">
+                            {{ session('edit') }}
+</div>@endif
 </div></div>
 
           <!-- ========== tables-wrapper start ========== -->
@@ -50,17 +58,33 @@
                         <tr>
                           <td class="min-width">
                             <div class="lead">
+                              <!-- check if image exists -->
+                              @empty($film->image)
+                                <p>  image is empty</p>
+                                @else
                               <div class="lead-image">
+                            
                               <img src="{{asset('storage/'.$film->image)}}" width="70px" height="70px" alt="">
-                              </div>
+                                @endempty
+                            </div>
                               <div class="lead-text">
+                              
                               <td>{{$film->name}}</td>
                               </div>
+                              @empty($film->description)
+                                <td>  description is empty</td>
+                                @else
                               <div class="lead-text">
+                             
                               <td>{{$film->description}}</td>
+                              @endempty
                               </div>
+                              @empty($film->show_time)
+                                <td>  time is empty</td>
+                                @else
                               <div class="lead-text">
                               <td>{{$film->show_time}}</td>
+                              @endempty
                               </div>
                             </div>
                           </td>

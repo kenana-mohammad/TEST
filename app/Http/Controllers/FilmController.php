@@ -41,27 +41,42 @@ class FilmController extends Controller
     public function store(filmRequest $request)
     {
         //
-   //film
-        $request->validated();
-        if ($request->hasFile('image')) {
-            $extension = $request->file('image')->getClientOriginalExtension();
-            $filename = Str::random(40).'.'.$extension;
-            $path = $request->file('image')->storeAs('film', $filename, 'public');
-                  }
-             $film=film::create([
-           'name' =>$request->name,
-            'show_time' => $request->time,
-           'description' =>$request->description,
-             'image' =>$path,
-       
-                ]);                  
-                  
-         // save to film-type
-        
-              $film->types()->attach($request->Type_id);
+   //film validate
+   $request->validated();
+   //قيمة بدائية
+            $path = null;
+          $description = null; 
+           $show_time =null;
+           //check image 
+            if ($request->hasFile('image')) {
+    $extension = $request->file('image')->getClientOriginalExtension();
+    $filename = Str::random(40).'.'.$extension;
+    $path = $request->file('image')->storeAs('film', $filename, 'public');
+    $image = $path;
+}
+ // check
+    $show_time = $request->input('time') != null ? $request->input('time') : null ;
+    $description = $request->input('description') != null ? $request->input('description') : null ;
+    $image = $request->input('image') != null ? $path  : null ;
 
-                return redirect()->route('film.index')->with('msg','done');
-        
+         $film = film::create([
+         'name' => $request->name,
+         'show_time' =>$show_time,
+         'description' => $description,
+         'image' => $image,
+]);
+
+// save to film-type
+$types = Type::all();
+
+             if ($types->count() > 0) {
+         $film->types()->attach($request->Type_id);
+               }
+          else {
+      $type = "null";
+        }
+
+            return redirect()->route('film.index')->with('add', 'done');
          
          //type
         
@@ -98,22 +113,27 @@ class FilmController extends Controller
     {
         //
         $request->validated();
-
         $film = film::find($id);
-
-        $film->name=$request->input('name');
-        $film->show_time=$request->input('time');
-        $film->description=$request->input('description');
 
         if ($request->hasFile('image')) {
             $extension = $request->file('image')->getClientOriginalExtension();
-            $filename = Str::random(40).'.'.$extension;
+            $filename = Str::random(40) . '.' . $extension;
             $path = $request->file('image')->storeAs('film', $filename, 'public');
-                  }
-        $film->save();
-
-            $film->types()->sync($request->types_id);
-            return redirect()->route('film.index');
+        } else {
+            $path = $film->image;
+        }
+        
+          $image = $path;
+        
+        $film->update([
+            'name' => $request->name,
+            'description' =>  $request->description,
+            'show_time' =>  $request->time,
+            'image' => $image,
+        ]);
+        
+        $film->types()->sync($request->types_id);
+        return redirect()->route('film.index')->with('edit','edit film');
     }
 
     /**

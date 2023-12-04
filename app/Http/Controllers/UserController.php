@@ -52,10 +52,8 @@ class UserController extends Controller
         //For demo purposes only. When creating user or inviting a user
         // you should create a generated random password and email it to the user
        $request->validated();
-       if($validator->fails()){
-        return $validator->errors();
-      }
-    else{  
+       
+    
         $user = new User();
         $input = $request->all();
         $input['password'] = Hash::make($input['password']);
@@ -66,7 +64,7 @@ class UserController extends Controller
          $user->assignRole($request->input('role'));
          return redirect()->route('users.index')
            ->with('add', 'User created successfully');
-    }
+    
        
     }
 

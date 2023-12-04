@@ -68,10 +68,9 @@ class TypeController extends Controller
     {
         //
         $type= type::find($id);
-        $type->type=$request->input('type');
-        $type->save();
-        
-        $type->Films()->sync($type->id);
+        $type->update([
+            'type' =>$request->type,
+        ]);
         return redirect()->route('type.index');
     }
 

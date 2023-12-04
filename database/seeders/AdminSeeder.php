@@ -33,11 +33,11 @@ class AdminSeeder extends Seeder
        
         $user->assignRole([$role->id]);
 // role = user
-$user = User::Create([
-    'name' => 'kinana',
-    'email' => 'k@1111.com',
-    'password' => bcrypt('11111111'),
-    'role' => 'user',
+       $user = User::Create([
+         'name' => 'kinana',
+         'email' => 'k@1111.com',
+         'password' => bcrypt('11111111'),
+          'role' => 'user',
    ]);
         $role = Role::create(['name' => 'user']);
        
