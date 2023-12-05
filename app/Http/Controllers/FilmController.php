@@ -50,7 +50,7 @@ class FilmController extends Controller
            //check image 
             if ($request->hasFile('image')) {
     $extension = $request->file('image')->getClientOriginalExtension();
-    $filename = Str::random(40).'.'.$extension;
+    $filename = Str::random(20).'.'.$extension;
     $path = $request->file('image')->storeAs('film', $filename, 'public');
     $image = $path;
 }
@@ -117,7 +117,7 @@ $types = Type::all();
 
         if ($request->hasFile('image')) {
             $extension = $request->file('image')->getClientOriginalExtension();
-            $filename = Str::random(40) . '.' . $extension;
+            $filename = Str::random(20) . '.' . $extension;
             $path = $request->file('image')->storeAs('film', $filename, 'public');
         } else {
             $path = $film->image;
